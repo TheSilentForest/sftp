@@ -8,12 +8,10 @@ import (
 // Makes sure we have a clean Windows absolute path to work with
 // If the path is not absolute we assume it's on C:\
 func cleanPath(p string) string {
-	// Hack remove double escaped backslash
-	p = strings.Replace(p, "\\\\", "\\", -1)
-
-	// Hack to make path sent by sftp client work in Windows
-	if absPath, err := filepath.Abs("."); err == nil {
-		p = strings.TrimPrefix(p, absPath+"/")
+	// Hack to cope with sftp client paths
+	parts := strings.SplitN(p, "/", 2)
+	if len(parts == 2) && len(parts[0] > 2) && parts[0][0:2] == "C:" {
+		p = parts[1]
 	}
 
 	p = filepath.FromSlash(p)
