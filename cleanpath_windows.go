@@ -10,7 +10,7 @@ import (
 func cleanPath(p string) string {
 	// Hack to cope with sftp client paths
 	parts := strings.SplitN(p, "/", 2)
-	if len(parts == 2) && len(parts[0] > 2) && parts[0][0:2] == "C:" {
+	if len(parts) == 2 && len(parts[0]) > 2 && parts[0][0:2] == "C:" {
 		p = parts[1]
 	}
 
