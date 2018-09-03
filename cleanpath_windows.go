@@ -13,7 +13,7 @@ func cleanPath(p string) string {
 		p = strings.TrimPrefix(p, absPath+"/")
 	}
 
-	p = filepath.ToSlash(p)
+	p = filepath.FromSlash(p)
 	if filepath.VolumeName(p) == "" {
 		if len(p) > 0 {
 			if p[0] != '\\' {
