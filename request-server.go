@@ -4,8 +4,6 @@ import (
 	"context"
 	"io"
 	"os"
-	"path"
-	"path/filepath"
 	"strconv"
 	"sync"
 	"syscall"
@@ -231,13 +229,4 @@ func cleanPacketPath(pkt *sshFxpRealpathPacket) responsePacket {
 			Attrs:    emptyFileStat,
 		}},
 	}
-}
-
-// Makes sure we have a clean POSIX (/) absolute path to work with
-func cleanPath(p string) string {
-	p = filepath.ToSlash(p)
-	if !filepath.IsAbs(p) {
-		p = "/" + p
-	}
-	return path.Clean(p)
 }
