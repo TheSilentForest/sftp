@@ -14,6 +14,11 @@ func cleanPath(p string) string {
 		p = parts[1]
 	}
 
+	// Hack to cope with sftp client according to ansible
+	if len(p) > 1 && p[0] == '\'' && p[len(p)-1] == '\'' {
+		p = p[1 : len(p)-1]
+	}
+
 	p = filepath.FromSlash(p)
 	if filepath.VolumeName(p) == "" {
 		if len(p) > 0 {
