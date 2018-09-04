@@ -11,7 +11,7 @@ import (
 
 func (p sshFxpExtendedPacketStatVFS) respond(svr *Server) responsePacket {
 	stat := &syscall.Statfs_t{}
-	if err := syscall.Statfs(p.Path, stat); err != nil {
+	if err := syscall.Statfs(cleanPath(p.Path), stat); err != nil {
 		return statusFromError(p, err)
 	}
 
